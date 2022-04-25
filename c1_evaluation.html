@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>C1 EVALUATION</title>
+</head>
+<body>
+    <ol class="list">
+        
+    </ol>
+
+    <script>
+        if (localStorage.getItem('list')){
+            data = localStorage.getItem('list')
+           data = data.split(",")
+            list = document.querySelector(".list");
+            for (const iterator of data) {
+            const temp = iterator
+
+             list.innerHTML+=`<li> ${temp} </li> `;
+                
+            }
+
+        }
+        else{
+        url=`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=20`
+        fetch(url)
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+         list = document.querySelector(".list");
+         arr={}
+         for (const iterator of data.results) {
+             const temp = iterator.name
+             arr[temp]=1
+             list.innerHTML+=`<li> ${temp} </li> `;
+            }
+            
+        localStorage.setItem('list',arr)
+
+
+
+        })
+    }
+
+    </script>
+</body>
+
+</html>
